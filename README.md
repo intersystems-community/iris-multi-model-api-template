@@ -1,5 +1,5 @@
 ## intersystems-iris-docker-rest-template
-This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
+This is a template of a Multi-model REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
 can be developed with Docker and VSCode,
 can ve deployed as ZPM module.
@@ -9,7 +9,7 @@ Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installi
 
 ## Installation with ZPM
 
-zpm:USER>install rest-api-template
+zpm:USER>install multi-model-api-template
 
 ## Installation for development
 
@@ -34,24 +34,29 @@ or open the folder in VSCode and do the following:
 ## How to Work With it
 
 This template creates /crud REST web-application on IRIS which implements 4 types of communication: GET, POST, PUT and DELETE aka CRUD operations.
-These interface works with a sample persistent class Sample.Person.
+These interface works with a sample persistent class dc.Sample.Person.
 
-Open http://localhost:52773/swagger-ui/index.html to test the REST API
-
+Open http://localhost:52773/swagger-ui/index.html?url=http://localhost:52773/api/mgmnt/v1/USER/spec/crud to test the REST API
 # Testing GET requests
 
-To test GET you need to have some data. You can create it with POST request (see below), or you can create some fake testing data. to do that open IRIS terminal or web terminal on /localhost:52773/terminal/  and call:
+To test GET you need to have some data. You can create it with POST request (see below), or you can create some random testing data. to do that call GET on /persons/gen/amount
+where amount is a number of records you want to generate.
+
+Call:
 
 ```
-USER>do ##class(Sample.Person).AddTestData(10)
+localhost:52773/crud/persons/gen/10
 ```
-This will create 10 random records in Sample.Person class.
+to create 10 random records.
+
+Or generate with call via IRIS Terminal
+
+```
+USER>do ##class(dc.Sample.Person).AddTestData(10)
+```
+This will create 10 random records in dc.Sample.Person class.
 
 
-You can get swagger Open API 2.0 documentation on:
-```
-localhost:yourport/_spec
-```
 
 This REST API exposes two GET requests: all the data and one record.
 To get all the data in JSON call:
@@ -84,7 +89,7 @@ Adjust the authorisation if needed - it is basic for container with default logi
 
 and send the POST request to localhost:52773/crud/persons/
 
-This will create a record in Sample.Person class of IRIS.
+This will create a record in dc.Sample.Person class of IRIS.
 
 # Testing PUT request
 
