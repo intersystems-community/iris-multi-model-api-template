@@ -1,4 +1,4 @@
-## intersystems-iris-docker-rest-template
+## iris-multi-model-rest-template
 This is a template of a Multi-model REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
 can be developed with Docker and VSCode,
